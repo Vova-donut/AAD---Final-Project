@@ -1,0 +1,54 @@
+{
+  "name": "study-planner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "React PWA with private study tasks, study sessions and Web Push",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "setup": "node src/scripts/setup.js",
+    "dev": "concurrently -k \"node --watch src/server/index.js\" \"vite --host localhost\"",
+    "build": "vite build",
+    "start": "node src/server/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "admin": "node src/scripts/admin.js",
+    "db": "node src/scripts/database.js",
+    "package": "node src/scripts/package.js",
+    "format": "prettier --write src vite.config.js index.html",
+    "format:check": "prettier --check src vite.config.js index.html"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.4",
+    "helmet": "^8.3.0",
+    "idb": "^8.0.4",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.12.2",
+    "pino": "^10.4.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "web-push": "^4.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.3.0",
+    "@vitest/coverage-v8": "^5.1.0",
+    "concurrently": "^10.0.7",
+    "fake-indexeddb": "^6.2.8",
+    "jsdom": "^31.0.1",
+    "prettier": "^3.10.1",
+    "supertest": "^7.3.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

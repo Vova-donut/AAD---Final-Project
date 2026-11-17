@@ -1,6 +1,24 @@
 # Study Planner
 
-Final project for IA730001 Advanced Application Development Concepts. Two independent features provide full CRUD: coursework tasks and study sessions. React, Express, MongoDB and a service worker provide a PWA with private accounts and read-only offline snapshots.
+Study Planner is a web application for keeping track of coursework and planning study sessions. Students can record what needs to be done, set deadlines and priorities, and update their progress. Each account has its own records.
+
+This project was developed for IA730001 Advanced Application Development Concepts. It uses React with Vite for the interface, Express for the API, and MongoDB for storage. Progressive Web App (PWA) support lets users reopen the interface and read previously loaded records when their connection is unavailable.
+
+## What you can do
+
+- Create, view, edit and delete coursework tasks, including their course, due date, priority, status and notes.
+- Plan study sessions with a start time and duration, then mark them as completed. Sessions also support full CRUD.
+- Register and sign in to a private account. The server checks ownership whenever a record is requested or changed.
+- Read saved tasks and sessions offline. Changes become available again when the connection returns.
+- Enable browser notifications and send a test Web Push message from the interface or through the API.
+
+## How it works
+
+The React interface sends HTTPS requests to the Express API. The server checks the user's identity and validates the submitted fields before reading or changing MongoDB records. The same validation schemas are used in the interface and API. For example, a study session must last between 15 and 240 minutes.
+
+A service worker caches the interface files in `study-planner-shell-v1`. Personal records are stored separately in IndexedDB as snapshots for the signed-in user. API responses are excluded from the service worker cache. An online logout clears the snapshots and invalidates the user's existing JWTs.
+
+Web Push starts when the user grants notification permission. The browser retrieves the public VAPID key from `/api/push/key`, creates a subscription and sends it to the backend. The server keeps the matching private key and uses it to authenticate outgoing push messages. When a message reaches the browser, the service worker asks the operating system to display it. Both the website and the operating system must allow notifications; a successful API send alone does not confirm that a banner appeared.
 
 ## Start locally
 
@@ -74,4 +92,3 @@ npm run package -- StudentID Name
 ```
 
 The generated `artifacts/StudentID-Name.zip` includes source, configuration examples, report and Postman collection. It excludes secrets, dependencies, local MongoDB data and build output. All implementation code is under `src`.
-# AAD---Final-Project
